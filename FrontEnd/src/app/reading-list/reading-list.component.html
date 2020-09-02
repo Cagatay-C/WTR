@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-xs-10">
+    <hr />
+    <ul class="list-group" *ngFor="let reading of readingBooks; let i = index">
+      <a class="list-group-item" style="cursor:pointer"
+        >{{ reading.bookName
+        }}<button
+          class="badge"
+          style="background-color: rgba(255, 0, 0, 0.63)"
+          (click)="onDelete(i)"
+        >
+          X
+        </button></a
+      >
+    </ul>
+  </div>
+</div>

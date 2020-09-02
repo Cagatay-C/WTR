@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-xs-12 col-md-6 col-md-offset-3">
+    <div style="text-align: center">
+      <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+    </div>
+
+    <form
+      [formGroup]="authFormReact"
+      (ngSubmit)="onSubmit()"
+      *ngIf="!isLoading"
+    >
+      <div class="form-group">
+        <label for="name">Username</label>
+        <input
+          class="form-control"
+          id="username"
+          type="text"
+          formControlName="username"
+          [(ngModel)]="username"
+        />
+        <span
+          *ngIf="
+            !authFormReact.get('username').valid &&
+            authFormReact.get('password').touched
+          "
+          class="help-block"
+          ><span *ngIf="authFormReact.get('username').errors['required']"
+            >This field is required!</span
+          >
+          <span *ngIf="authFormReact.get('username').errors['nameIsForbidden']"
+            >This name is forbidden!</span
+          >
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          class="form-control"
+          id="password"
+          type="password"
+          formControlName="password"
+          [(ngModel)]="password"
+        />
+        <span
+          *ngIf="
+            !authFormReact.get('password').valid &&
+            authFormReact.get('password').touched
+          "
+          class="help-block"
+          >Please enter a valid password!</span
+        >
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary" [disabled]="!authFormReact.valid">
+          {{ isLogin ? "Login" : "Signup" }}
+        </button>
+        <button
+          type="button"
+          style="margin-left: 2px"
+          class="btn btn-primary"
+          (click)="switchLogin()"
+        >
+          Switch to {{ isLogin ? "Signup" : "Login" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
